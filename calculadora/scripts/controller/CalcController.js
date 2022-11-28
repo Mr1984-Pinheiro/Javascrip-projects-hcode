@@ -3,7 +3,7 @@ class CalcController {
     constructor () {
 
         this._displayCalc = "0"; //underline_refere-se a atributo privado
-        this._dataAtual;
+        this._currentDate;
     }
 
     get displayCalc(){
@@ -16,11 +16,11 @@ class CalcController {
         this._displayCalc = valor;
     }
 
-    get dataAtual(){
-        return this._dataAtual;
+    get currentDate(){
+        return this._currentDate;
     }
 
-    set dataAtual(data){
-        this._dataAtual = data;
+    set currentDate(data){
+        this._currentDate = data;
     }
 }
