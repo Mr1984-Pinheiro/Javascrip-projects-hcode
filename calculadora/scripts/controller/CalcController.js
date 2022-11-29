@@ -2,6 +2,7 @@ class CalcController {
     
     constructor () {
 
+        this._operation = [];
         this._locale = 'pr-BR';
         this._displayCalcEl = document.querySelector("#display");//underline_refere-se a atributo privado
         this._dateEl = document.querySelector("#data");
@@ -33,6 +34,60 @@ class CalcController {
 
     }
 
+    clearAll(){
+
+
+    }
+
+    clearEntry() {
+
+    }
+
+    addOperation(value) {
+
+        this._operation.push(value);
+    }
+
+    setError() {
+
+        this.displayCalc = "Error";
+    }
+
+    exectBtn(value){
+
+        switch (value) {
+            case 'ac':
+                    this.clearAll();
+                    break;
+            case 'ce':
+                    this.clearEntry();
+                    break;
+            case 'soma':
+                    
+                    break;
+            case 'subtracao':
+                    
+                    break;
+            case 'divisao':
+                    
+                    break;
+            case 'multiplicacao':
+                    
+                    break;
+            case 'porcento':
+                    
+                    break;
+            case 'igual':
+                    
+                    break;
+            
+        
+            default:
+                this.setError();
+                break;
+        }
+    }
+
     initButtonsEvents(){
 
         let buttons = document.querySelectorAll("#buttons > g, #parts > g");
@@ -41,7 +96,9 @@ class CalcController {
 
             this.addEventListenerAll(btn, "click drag", e => {
 
-                console.log(btn.className.baseVal.replace("btn-", ""));
+                let textBtn = btn.className.baseVal.replace("btn-", "");
+
+                this.exectBtn(textBtn);
 
             });
 
