@@ -2,6 +2,9 @@ class CalcController {
     
     constructor () {
 
+        this._lastOperator = '';
+        this._lastNumber = '';
+
         this._operation = [];
         this._locale = 'pr-BR';
         this._displayCalcEl = document.querySelector("#display");//underline_refere-se a atributo privado
@@ -82,15 +85,22 @@ class CalcController {
 
     }
 
+    getResult(){
+
+        return eval(this._operation.join(""));
+    }
+
     calc(){
 
         let last = '';
 
         if (this._operation.length > 3 ) {
             last = this._operation.pop();
+
+            this._lastNumber = this.getResult();
         }
          
-        let result = eval(this._operation.join(""));
+        let result = this.getResult();
 
         if (last == '%') {
 
@@ -110,18 +120,30 @@ class CalcController {
 
     }
 
-    setLastNumberToDisplay(){
+    getLastItem(isOperator = true){
 
-        let lastNamber;
+        let lastItem;
 
         for (let i = this._operation.length-1; i >= 0; i-- ) {
 
-            if (!this.isOperator(this._operation[i])) {
-                lastNamber = this._operation[i];
+            if (this.isOperator(this._operation[i]) == isOperator ) {
+                lastItem = this._operation[i];
                 break;
             }
+        
         }
 
+        return lastItem;
+
+                
+    }
+
+    
+
+    setLastNumberToDisplay(){
+
+        let lastNamber = this.getLastItem(false);
+        
         if (!lastNamber) lastNamber = 0;
 
         this.displayCalc = lastNamber;
