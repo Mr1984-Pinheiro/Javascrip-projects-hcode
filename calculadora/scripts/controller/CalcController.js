@@ -94,10 +94,22 @@ class CalcController {
 
         let last = '';
 
-        if (this._operation.length > 3 ) {
-            last = this._operation.pop();
+        this._lastOperator = this.getLastItem(); //mesmo método dentro do if pode ir para fora
 
+        if (this._operation.length < 3) {
+            
+            let firstItem = this._operation[0];
+            this._operation = [firstItem, this._lastOperator, this._lastNumber];
+        }
+
+        if (this._operation.length > 3 ) {
+
+            last = this._operation.pop(); 
             this._lastNumber = this.getResult();
+
+        } else if (this._operation.length == 3) {
+            
+            this._lastNumber = this.getLastItem(false);
         }
          
         let result = this.getResult();
@@ -131,6 +143,11 @@ class CalcController {
                 break;
             }
         
+        }
+
+        if (!lastItem) {
+            
+            lastItem = (isOperator) ? this._lastOperator : this._lastNumber;
         }
 
         return lastItem;
