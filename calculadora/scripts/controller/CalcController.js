@@ -16,6 +16,19 @@ class CalcController {
         this.initKeyboard();
     }
 
+    copyToClipboard(){
+
+        let input = document.createElement('input');
+
+        input.value = this.displayCalc;
+
+        document.body.appendChild(input);
+
+        input.select();
+
+        document.execCommand("Copy");
+    }
+
     initialize(){   
         
         this.setDisplayDateTime();
@@ -313,6 +326,10 @@ class CalcController {
             case '8':
             case '9':
                 this.addOperation(parseInt(value));
+                break;
+            case 'c':
+                if (e.ctrKey) this.copyToClipboard();
+                
                 break;
         
             default:
