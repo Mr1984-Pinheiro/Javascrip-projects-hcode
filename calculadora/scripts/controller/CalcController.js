@@ -26,7 +26,20 @@ class CalcController {
 
         input.select();
 
-        document.execCommand("Copy");
+        document.execCommand('Copy');
+
+        input.remove();
+    }
+
+    pasteFromClipboard(){
+
+        document.addEventListener('paste', e=>{
+
+           let text = e.clipboardData.getData('Text');
+
+           this.displayCalc = parseFloat(text);
+        });
+
     }
 
     initialize(){   
@@ -40,6 +53,7 @@ class CalcController {
        }, 1000);
 
        this.setLastNumberToDisplay();
+       this.pasteFromClipboard();
        
         
     }
