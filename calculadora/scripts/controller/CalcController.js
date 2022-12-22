@@ -2,6 +2,7 @@ class CalcController {
     
     constructor () {
 
+        this._audioOnOff = false;
         this._lastOperator = '';
         this._lastNumber = '';
 
@@ -54,8 +55,23 @@ class CalcController {
 
        this.setLastNumberToDisplay();
        this.pasteFromClipboard();
+
+       document.querySelectorAll('.btn-ac').forEach(btn=>{
+
+            btn.addEventListener('dblclick', e=>{
+
+                this.toggleAudio();
+            });
+       });
        
         
+    }
+
+    toggleAudio(){
+
+        //this._audioOnOff = (this._audioOnOff) ? false : true;
+        this._audioOnOff = !this._audioOnOff; 
+
     }
 
     initKeyboard(){
